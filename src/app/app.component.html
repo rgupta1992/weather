@@ -10,18 +10,67 @@
     </div>
   </div>
   <div class="right-section">
-      <ul class="nav nav-tabs">
-          <li class="nav-item">
-            <a class="nav-link active" href="#">Today</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">week</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Month</a>
-          </li>
-         
-        </ul>
+      
+
+   
+      <div class="tab-titles">
+        <span (click)="selectTab('Today')" class="custom-tab" [ngClass] = "{'selected': currentTab == 'Today'}">Today</span>
+        <span (click)="selectTab('Week')" class="custom-tab" [ngClass] = "{'selected': currentTab == 'Week'}">Week</span>
+        <span (click)="selectTab('Month')" class="custom-tab" [ngClass] = "{'selected': currentTab == 'Month'}">Month</span>
+      </div>
+
+      <div [ngSwitch]="currentTab" style="height: 200px !important; margin-left: 0px;">
+        <div *ngSwitchCase="'Today'">
+           
+        </div>
+        <div *ngSwitchCase="'Week'">
+          <div *ngIf="fiveDayForecast">
+            <table class="table table-borderless month-table" >
+                <thead>
+                  <tr>                        
+                    <th scope="col">Date</th>
+                    <th scope="col">Temp</th>
+                    <th scope="col">Condition</th>
+                  </tr>
+                </thead>
+                <tbody>
+      
+                  <tr *ngFor="let day of fiveDayForecast.list">
+                    <td>{{getFormattedDate(day.dt)}}</td>
+                    <td>{{getTemperature(day.main.temp)}}<sup class="degree">&#176;</sup></td>
+                    <td>{{day.weather[0].description}}</td>
+                  </tr>
+                
+                </tbody>
+              </table>
+            </div>
+        </div>
+        <div *ngSwitchCase="'Month'">
+            <div *ngIf="sixteenDayForecast">
+            <table class="table table-borderless month-table" >
+                <thead>
+                  <tr>                        
+                    <th scope="col">Date</th>
+                    <th scope="col">Temp</th>
+                    <th scope="col">Condition</th>
+                  </tr>
+                </thead>
+                <tbody>
+      
+                  <tr *ngFor="let day of sixteenDayForecast.list">
+                    <td>{{getFormattedDate(day.dt)}}</td>
+                    <td>{{getTemperature(day.temp.day)}}<sup class="degree">&#176;</sup></td>
+                    <td>{{day.weather[0].description}}</td>
+                  </tr>
+                
+                </tbody>
+              </table>
+        </div>
+        </div>
+
+
+      </div>
+     
   </div>
 </div>
 
