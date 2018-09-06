@@ -1,4 +1,5 @@
 <div class="weather-app-container">
+ 
   <div class="left-section">
     <div *ngIf="forecastForCurrentCity as weatherData">
       <div class="current-date">{{getFormattedDate(weatherData.dt * 1000)}}</div>
@@ -10,9 +11,16 @@
     </div>
   </div>
   <div class="right-section">
-
-
-
+      <div class="top-section">
+          <div class="forecast-title">
+            Forecast
+          </div>
+        </div>
+        <div class="forecast-icons">
+          <span *ngFor="let item of forecastIcons">
+            <div class="name-icon-block"><span class="forecast-icon"><img [src]="item.icon"></span><span class="forecast-name">{{item.name}}</span></div>
+          </span>
+        </div>
     <div class="tab-titles">
       <span (click)="selectTab('Today')" class="custom-tab" [ngClass]="{'selected': currentTab == 'Today'}">Today</span>
       <span (click)="selectTab('Week')" class="custom-tab" [ngClass]="{'selected': currentTab == 'Week'}">Week</span>

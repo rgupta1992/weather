@@ -14,6 +14,8 @@ export class AppComponent {
   currentTab: any = 'Today';
   todaysForecast: any;
 
+  forecastIcons:any = [{name:'Monday', icon:'assets/icons/cloudy.png'}, {name:'Tuesday', icon:'assets/icons/rainy.png'}, {name:'Wednesday', icon:'assets/icons/windy.png'},{name:'Thursday', icon:'assets/icons/sunny.png'}];
+
 
   constructor(private weatherService: WeatherDataService){
     this.weatherService.getForecastForCurrentCity().subscribe(res =>{
@@ -38,10 +40,8 @@ export class AppComponent {
   }
 
 
-  getFormattedDate(date){
-    
-    let time = new Date(date);
-    
+  getFormattedDate(date){    
+    let time = new Date(date);    
     return time.toLocaleString('en-US', { timeZone: 'Asia/Kolkata',month: 'short', day: 'numeric',year: 'numeric' });    
   }
 
@@ -62,13 +62,13 @@ export class AppComponent {
       hours = hours ? hours : 12; // the hour '0' should be '12'
       let stringminutes = minutes < 10 ? '0'+minutes : minutes;
       var strTime = hours + ':' + stringminutes + ' ' + ampm;
-      return strTime;
-    
+      return strTime;    
   }
 
   getFormattedDateAndHour(value){
-  let time = new Date(value);
-    
+  let time = new Date(value);    
     return time.toLocaleString('en-US', { timeZone: 'Asia/Kolkata',month: 'short', day: 'numeric',year: 'numeric', hour:'numeric', minute:'numeric' });
   }
+
+
 }
