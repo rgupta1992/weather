@@ -1,0 +1,18 @@
+.weather-app-container{
+    box-shadow: 0 0 7px 0 #c9c9c9;
+    width: 600px;
+    height: 500px;
+    margin-left: calc(50% - 300px);
+    margin-top: 50px;
+    border-radius: 5px; 
+    display: flex;   
+}
+
+.left-section{
+    width: 40%;
+    background: linear-gradient(135deg, #61d07ac4, #3e94bfcc);
+}
+
+.right-section{
+    width: 60%;
+}

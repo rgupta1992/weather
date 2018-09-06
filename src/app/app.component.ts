@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { WeatherDataService } from './weather-data.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'weather-app';
+
+  forecastForCurrentCity: any;
+  constructor(private weatherService: WeatherDataService){
+    this.weatherService.getForecastForCurrentCity().subscribe(res =>{
+      this.forecastForCurrentCity = res;
+    })
+  }
 }
