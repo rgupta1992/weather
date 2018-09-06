@@ -43,6 +43,7 @@
 }
 
 .month-table{
+    height: 200px;
     font-size: 12px;
     color: #656464;
     overflow:scroll;
@@ -69,3 +70,23 @@ tbody{
     border-bottom: 3px solid #4cbdad;
     padding-bottom: 4.5px;
 }
+
+.custom-table{
+    font-size: 13px;
+    color: gray;
+    height: 300px;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+.custom-row{
+    margin: 0px 20px;
+    line-height: 30px;
+}
+
+.table-wrapper-scroll-y {
+    display: block;
+    max-height: 200px;
+    overflow-y: auto;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+  }

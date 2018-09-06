@@ -1,76 +1,135 @@
 <div class="weather-app-container">
   <div class="left-section">
     <div *ngIf="forecastForCurrentCity as weatherData">
-      <div class="current-date">{{getFormattedDate(weatherData.dt)}}</div>
+      <div class="current-date">{{getFormattedDate(weatherData.dt * 1000)}}</div>
       <div class="temp-city-container">
-      <div class="temp">{{getTemperature(weatherData.main.temp)}}<sup class="degree">&#176;</sup></div>
-      <div class="country">{{weatherData.sys.country}}</div>
-      <div class="city">{{weatherData.name}}</div>
-    </div>
+        <div class="temp">{{getTemperature(weatherData.main.temp)}}<sup class="degree">&#176;</sup></div>
+        <div class="country">{{weatherData.sys.country}}</div>
+        <div class="city">{{weatherData.name}}</div>
+      </div>
     </div>
   </div>
   <div class="right-section">
-      
 
-   
-      <div class="tab-titles">
-        <span (click)="selectTab('Today')" class="custom-tab" [ngClass] = "{'selected': currentTab == 'Today'}">Today</span>
-        <span (click)="selectTab('Week')" class="custom-tab" [ngClass] = "{'selected': currentTab == 'Week'}">Week</span>
-        <span (click)="selectTab('Month')" class="custom-tab" [ngClass] = "{'selected': currentTab == 'Month'}">Month</span>
+
+
+    <div class="tab-titles">
+      <span (click)="selectTab('Today')" class="custom-tab" [ngClass]="{'selected': currentTab == 'Today'}">Today</span>
+      <span (click)="selectTab('Week')" class="custom-tab" [ngClass]="{'selected': currentTab == 'Week'}">Week</span>
+      <span (click)="selectTab('Month')" class="custom-tab" [ngClass]="{'selected': currentTab == 'Month'}">Month</span>
+    </div>
+
+    <div [ngSwitch]="currentTab" style="height: 200px !important; margin-left: 0px;">
+      <div *ngSwitchCase="'Today'">
+        <div *ngIf="todaysForecast">
+          <div class="table-wrapper-scroll-y">
+            <table class="table table-borderless month-table">
+              <thead>
+                <tr>
+                  <th scope="col">Hour</th>
+                  <th scope="col">Temp</th>
+                  <th scope="col">Condition</th>
+                </tr>
+              </thead>
+              <tbody>
+
+                <tr *ngFor="let day of todaysForecast">
+                  <td>{{getFormattedHour(day.dt * 1000)}}</td>
+                  <td>{{getTemperature(day.main.temp)}}<sup class="degree">&#176;</sup></td>
+                  <td>{{day.weather[0].description}}</td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </div>
+      <div *ngSwitchCase="'Week'">
+
+        <div *ngIf="fiveDayForecast">
+          <div class="table-wrapper-scroll-y">
+            <table class="table table-borderless month-table">
+              <thead>
+                <tr>
+                  <th scope="col">Date</th>
+                  <th scope="col">Temp</th>
+                  <th scope="col">Condition</th>
+                </tr>
+              </thead>
+              <tbody>
+
+                <tr *ngFor="let day of fiveDayForecast.list">
+                  <td>{{getFormattedDateAndHour(day.dt * 1000)}}</td>
+                  <td>{{getTemperature(day.main.temp)}}<sup class="degree">&#176;</sup></td>
+                  <td>{{day.weather[0].description}}</td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+      <div *ngSwitchCase="'Month'">
+        <div *ngIf="sixteenDayForecast">
+          <div class="table-wrapper-scroll-y">
+            <table class="table table-borderless month-table">
+              <thead>
+                <tr>
+                  <th scope="col">Date</th>
+                  <th scope="col">Temp</th>
+                  <th scope="col">Condition</th>
+                </tr>
+              </thead>
+              <tbody>
+
+                <tr *ngFor="let day of sixteenDayForecast.list">
+                  <td>{{getFormattedDate(day.dt * 1000)}}</td>
+                  <td>{{getTemperature(day.temp.day)}}<sup class="degree">&#176;</sup></td>
+                  <td>{{day.weather[0].description}}</td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
 
-      <div [ngSwitch]="currentTab" style="height: 200px !important; margin-left: 0px;">
-        <div *ngSwitchCase="'Today'">
-           
-        </div>
-        <div *ngSwitchCase="'Week'">
-          <div *ngIf="fiveDayForecast">
-            <table class="table table-borderless month-table" >
-                <thead>
-                  <tr>                        
-                    <th scope="col">Date</th>
-                    <th scope="col">Temp</th>
-                    <th scope="col">Condition</th>
-                  </tr>
-                </thead>
-                <tbody>
-      
-                  <tr *ngFor="let day of fiveDayForecast.list">
-                    <td>{{getFormattedDate(day.dt)}}</td>
-                    <td>{{getTemperature(day.main.temp)}}<sup class="degree">&#176;</sup></td>
-                    <td>{{day.weather[0].description}}</td>
-                  </tr>
-                
-                </tbody>
-              </table>
-            </div>
-        </div>
-        <div *ngSwitchCase="'Month'">
-            <div *ngIf="sixteenDayForecast">
-            <table class="table table-borderless month-table" >
-                <thead>
-                  <tr>                        
-                    <th scope="col">Date</th>
-                    <th scope="col">Temp</th>
-                    <th scope="col">Condition</th>
-                  </tr>
-                </thead>
-                <tbody>
-      
-                  <tr *ngFor="let day of sixteenDayForecast.list">
-                    <td>{{getFormattedDate(day.dt)}}</td>
-                    <td>{{getTemperature(day.temp.day)}}<sup class="degree">&#176;</sup></td>
-                    <td>{{day.weather[0].description}}</td>
-                  </tr>
-                
-                </tbody>
-              </table>
-        </div>
-        </div>
 
+    </div>
 
-      </div>
-     
   </div>
 </div>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Custom table -->
+
+<!-- 
+
+
+<div *ngIf="fiveDayForecast">
+           <div class="custom-table">      
+                  <div *ngFor="let day of fiveDayForecast.list">
+                    <span class="custom-row">{{getFormattedDate(day.dt * 1000)}}</span>
+                    <span class="custom-row" style="width:20px">{{getTemperature(day.main.temp)}}<sup class="degree">&#176;</sup></span>
+                    <span class="custom-row">{{day.weather[0].description}}</span>
+                  </div>
+                </div>                
+               
+            </div> -->
