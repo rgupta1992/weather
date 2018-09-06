@@ -13,6 +13,20 @@ export class AppComponent {
   constructor(private weatherService: WeatherDataService){
     this.weatherService.getForecastForCurrentCity().subscribe(res =>{
       this.forecastForCurrentCity = res;
-    })
+    });
+  }
+
+
+  getFormattedDate(date){
+    console.log('Date :' + date);
+    let time = new Date(date);
+    console.log('Time :' + time);
+    return time.toLocaleString('en-US', { timeZone: 'Asia/Kolkata',month: 'short', day: 'numeric',year: 'numeric' });
+    //return time.toLocaleString('en-US', { timeZone: 'Asia/Kolkata' });
+    //return time;
+  }
+
+  getTemperature(temp){
+    return Math.trunc(temp);
   }
 }

@@ -12,8 +12,10 @@ export class WeatherDataService {
    }
 
    getForecastForCurrentCity(): Observable<any>{
-     let url = "http://api.openweathermap.org/data/2.5/weather?q=London&appid=048c43a2f7e00f37c3b4044df2ec3128";
+     let url = "http://api.openweathermap.org/data/2.5/weather?q=London&units=metric&appid=048c43a2f7e00f37c3b4044df2ec3128";
      return this.http.get(url);
    }
+
+   
 
 }

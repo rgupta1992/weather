@@ -4,13 +4,38 @@
     height: 500px;
     margin-left: calc(50% - 300px);
     margin-top: 50px;
-    border-radius: 5px; 
+    border-radius: 10px; 
     display: flex;   
 }
 
 .left-section{
     width: 40%;
     background: linear-gradient(135deg, #61d07ac4, #3e94bfcc);
+    color: white;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px; 
+}
+
+.current-date{
+    font-size: 14px;
+    margin: 30px;
+}
+
+.temp-city-container{
+    margin-top:300px;
+    margin-left:30px
+}
+
+.temp{
+    font-size: 70px;
+    font-weight: 300;
+    letter-spacing: 5px;
+    line-height: 75px;
+}
+
+.country, .city{
+    font-size: 14px;
+    line-height: 16px;
 }
 
 .right-section{

@@ -1,5 +1,27 @@
 <div class="weather-app-container">
-  <div class="left-section">left section</div>
-  <div class="right-section">right section</div>
+  <div class="left-section">
+    <div *ngIf="forecastForCurrentCity as weatherData">
+      <div class="current-date">{{getFormattedDate(weatherData.dt)}}</div>
+      <div class="temp-city-container">
+      <div class="temp">{{getTemperature(weatherData.main.temp)}}<sup class="degree">&#176;</sup></div>
+      <div class="country">{{weatherData.sys.country}}</div>
+      <div class="city">{{weatherData.name}}</div>
+    </div>
+    </div>
+  </div>
+  <div class="right-section">
+      <ul class="nav nav-tabs">
+          <li class="nav-item">
+            <a class="nav-link active" href="#">Today</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">week</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Month</a>
+          </li>
+         
+        </ul>
+  </div>
 </div>
 
